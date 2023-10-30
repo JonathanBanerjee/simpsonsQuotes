@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Spinner from "./components/Spinner";
 import "./App.css";
-import { sortCharacters } from "./utils/sort";
-import Sort from "./components/Sort";
-import Characters from "./components/Characters";
+import Interface from "./components/Interface";
 class App extends Component {
   state = {};
 
@@ -50,9 +48,13 @@ class App extends Component {
     this.setState({ sort: e.target.value });
   };
 
+  onFilterInput = (e) => {
+    this.setState({ filter: e.target.value });
+  };
+
   render() {
     // console.log(this.state);
-    const { simpsons, sort } = this.state;
+    const { simpsons, sort, filter } = this.state;
 
     if (!simpsons) {
       return (
@@ -65,18 +67,16 @@ class App extends Component {
     //Copy the simpsons
     const _simpsons = [...simpsons];
 
-    //Call my sort logic
-    sortCharacters(sort, _simpsons);
-
     return (
-      <div className="container">
-        <Sort onSortSelection={this.onSortSelection} />
-        <Characters
-          characters={_simpsons}
-          onDeleteClick={this.onDeleteClick}
-          onLikeClick={this.onLikeClick}
-        />
-      </div>
+      <Interface
+        onSortSelection={this.onSortSelection}
+        onDeleteClick={this.onDeleteClick}
+        onLikeClick={this.onLikeClick}
+        characters={_simpsons}
+        sort={sort}
+        filter={filter}
+        onFilterInput={this.onFilterInput}
+      />
     );
   }
 }
