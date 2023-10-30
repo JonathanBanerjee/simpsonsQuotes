@@ -20,7 +20,7 @@ class Interface extends Component {
     sortCharacters(sort, characters);
 
     //Filter the data
-    filterCharacters(filter, characters);
+    const filtered = filterCharacters(filter, characters);
 
     return (
       <div className="container">
