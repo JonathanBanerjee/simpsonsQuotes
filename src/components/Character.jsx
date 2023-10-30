@@ -6,18 +6,24 @@ import Controls from "./Controls";
 
 class Character extends Component {
   render() {
-    const { character, quote, image, characterDirection } =
+    const { character, quote, image, characterDirection, id, liked } =
       this.props.character;
 
-    console.log(characterDirection);
+    const { onLikeClick, onDeleteClick } = this.props;
+    // console.log(characterDirection);
 
     if (characterDirection === "Left") {
       return (
         <div className="character">
           <Name name={character} />
-          <Image image={image} />
+          <Image image={image} liked={liked} />
           <Quote quote={quote} />
-          <Controls />
+          <Controls
+            onLikeClick={onLikeClick}
+            id={id}
+            liked={liked}
+            onDeleteClick={onDeleteClick}
+          />
         </div>
       );
     }
@@ -26,8 +32,13 @@ class Character extends Component {
       <div className="character">
         <Name name={character} />
         <Quote quote={quote} />
-        <Image image={image} />
-        <Controls />
+        <Image image={image} liked={liked} />
+        <Controls
+          onLikeClick={onLikeClick}
+          id={id}
+          liked={liked}
+          onDeleteClick={onDeleteClick}
+        />
       </div>
     );
   }
